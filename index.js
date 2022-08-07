@@ -10,7 +10,7 @@ app.listen(3000, ()=> console.log("BOT STARTED"));
 
 const tweet = async () => {
   try {
-    await rwClient.v2.tweet(await getRandomHugot() + Math.floor(Math.random() * 100));
+    await rwClient.v2.tweet(await getRandomHugot() + " huhu " + Math.floor(Math.random() * 100));
     console.log("tweeted successfully");
   } catch (e) {
     console.error(e);
@@ -19,7 +19,7 @@ const tweet = async () => {
 
 
 
-const job = new CronJob("* * * * *", () => {
+const job = new CronJob("*/5 * * * *", () => {
   tweet();
 });
 
