@@ -9,7 +9,7 @@ const client = new TwitterApi({
     accessToken: process.env.ACCESS_TOKEN,
     accessSecret:process.env.ACCESS_SECRET
 })
-
+// console.log(process.env.APP_KEY)
 const rwClient = client.readWrite
 
 module.exports = rwClient

@@ -1,4 +1,5 @@
-const { randomInt } = require("crypto")
+const { randomInt } = require("crypto");
+const rwClient = require("./twitterClient.js");
 
 // lf commissioner yung kaya akong ipaglaban
 const quotes = [
@@ -14,12 +15,24 @@ const quotes = [
   "ako nalang kasi {name}",
   "dribble, back-step, sabay sabi ng miss na kita {name}",
   "ano ba talaga tayo {name}",
-]
+  "sana ako nalang paikutin mo kesa sa bike {name}",
+  "Sorry ha, ganito lang kasi ako {name}",
+  "{name} looking right because you left looking up because you let me down looking down because you didn't lift me up looking left because you're always right",
+  "{name} baby baby your my sun and moon",
+];
 
-users = ["Kobayashi_Acads"]
 
-module.exports = () => {
-  const randomQuote = quotes[randomInt(quotes.length)]
-  const randomUser = users[0]
-  return randomQuote.replace("{name}", `@${randomUser}`)
-}
+// user id ni scammer
+const userid = "1555081729131442182";
+
+
+module.exports = async () => {
+  const randomQuote = quotes[randomInt(quotes.length)];
+  const randomUser = await rwClient.v2
+        .user(userid, { "tweet.fields": ["id", "text"] })
+        .then((result) => {
+          response = result.data.username;
+          return response
+        });
+  return randomQuote.replace("{name}", `@${randomUser}`);
+};
